@@ -65,6 +65,8 @@ export default class Watcher {
     this.id = ++uid // uid for batching
     this.active = true
     this.dirty = this.lazy // for lazy watchers
+    //设计deps和newDeps的作用是保留上次搜集的deps和本次搜集的deps进行对比
+    //如果有过期的deps那么就通过dep.removeSub(this)移除掉这个watch
     this.deps = []
     this.newDeps = []
     this.depIds = new Set()
@@ -120,6 +122,7 @@ export default class Watcher {
   }
 
   /**
+   * 判断存在这个dep，
    * Add a dependency to this directive.
    */
   addDep (dep: Dep) {
@@ -134,6 +137,8 @@ export default class Watcher {
   }
 
   /**
+   * 移除newDep中没有的sub
+   * 把newdep全部赋值dep，然后清空所有的newdep
    * Clean up for dependency collection.
    */
   cleanupDeps () {
@@ -170,6 +175,7 @@ export default class Watcher {
   }
 
   /**
+   * 每次跑调取run的时候都会调用get重新去搜集newDep
    * Scheduler job interface.
    * Will be called by the scheduler.
    */
