@@ -2,40 +2,45 @@
   <div id="app">
     <img src="./assets/logo.png">
     <!-- <HelloWorld/> -->
-    <div>item2</div>
-    <div>{{item[1]}}</div>
-    <div @click="changeItemTwo">改变two</div>
+    <div>{{a}}</div>
+    <div>{{b}}</div>
+    <div @click="changeItemTwo">改变b</div>
     <div>item3name</div>
-    <div>{{item[2].name}}</div>
+    <div>{{c}}</div>
+    <div>{{d}}</div>
     <div @click="changeItemThree">改变three</div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+// import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
   data() {
     return {
-      item: [1, 2, { name: 'xu' }],
+      a: 1,
+      b: 2,
+      c: 3,
     };
   },
   methods: {
     changeItemTwo() {
-      // this.item[1] = this.item[1] + 1;
-      this.$set(this.item, 1, this.item[1] + 1);
+      this.b = this.b + 1;
     },
     changeItemThree() {
-      if (this.item[2].name === 'xu') {
-        this.item[2].name = 'zhi';
-      } else {
-        this.item[2].name = 'xu';
-      }
+      this.c = 8;
     },
   },
-  components: {
-    HelloWorld,
+  watch: {
+    b() {
+      this.c = this.c + 1;
+    },
+  },
+  computed: {
+    d() {
+      return this.b + this.c;
+    },
   },
 };
 </script>
@@ -46,7 +51,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  color: #2c3e50; margin-top: 60px; }
 </style>
