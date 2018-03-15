@@ -27,6 +27,7 @@ export const observerState = {
 }
 
 /**
+ * observer某一个data：data每个属性都会new dep
  * Observer class that are attached to each observed
  * object. Once attached, the observer converts target
  * object's property keys into getter/setters that
@@ -154,8 +155,10 @@ export function defineReactive (
     get: function reactiveGetter () {
       const value = getter ? getter.call(obj) : val
       if (Dep.target) {
+        //闭包的dep
         dep.depend()
         if (childOb) {
+          //与此同时，将watcher放到var.__ob__.dep中备份
           childOb.dep.depend()
           if (Array.isArray(value)) {
             dependArray(value)
