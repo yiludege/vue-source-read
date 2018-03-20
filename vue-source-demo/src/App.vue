@@ -2,7 +2,7 @@
   <div id="app">
     <img src="./assets/logo.png">
     <!-- <HelloWorld/> -->
-    <div>{{a}}</div>
+    <div @click="changeItemOne">pro的显示{{a}}</div>
     <div>{{b}}</div>
     <div @click="changeItemTwo">改变b</div>
     <div>item3name</div>
@@ -17,19 +17,28 @@
 
 export default {
   name: 'App',
+  props: {
+    hello: { type: Function },
+  },
   data() {
     return {
-      a: 1,
+      a: 0,
       b: 2,
       c: 3,
     };
   },
+  beforeUpdate() {
+    debugger;
+  },
   methods: {
+    changeItemOne() {
+      this.hello(3);
+    },
     changeItemTwo() {
       this.b = this.b + 1;
     },
     changeItemThree() {
-      this.c = 8;
+      this.$emit('click', 2);
     },
   },
   watch: {
