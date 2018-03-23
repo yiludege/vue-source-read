@@ -2,23 +2,27 @@
   <div id="app">
     <img src="./assets/logo.png">
     <!-- <HelloWorld/> -->
-    <div @click="changeItemOne">pro的显示{{a}}</div>
+    <div @click="changeItemOne">改变pro</div>
+    <div>proData的显示{{proData.num}}</div>
     <div>{{b}}</div>
     <div @click="changeItemTwo">改变b</div>
     <div>item3name</div>
     <div>{{c}}</div>
     <div>{{d}}</div>
     <div @click="changeItemThree">改变three</div>
+    <myComponent></myComponent>
+    <HelloWorld></HelloWorld>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld';
+import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
   props: {
-    hello: { type: Function },
+    proFun: { type: Function },
+    proData: { type: Object },
   },
   data() {
     return {
@@ -28,11 +32,18 @@ export default {
     };
   },
   beforeUpdate() {
-    debugger;
+    // eslint-disable-next-line
+    debugger
+    // eslint-disable-next-line
+    console.log('childBeforeUpdate');
+  },
+  updated() {
+    // eslint-disable-next-line
+    console.log('childUpdated');
   },
   methods: {
     changeItemOne() {
-      this.hello(3);
+      this.proFun(1);
     },
     changeItemTwo() {
       this.b = this.b + 1;
@@ -50,6 +61,9 @@ export default {
     d() {
       return this.b + this.c;
     },
+  },
+  components: {
+    HelloWorld,
   },
 };
 </script>
