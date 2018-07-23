@@ -1,19 +1,23 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <!-- <HelloWorld/> -->
     <div>{{a}}</div>
-    <div>{{b}}</div>
+    <div>{{b+a}}</div>
     <div @click="changeItemTwo">改变b</div>
     <div>item3name</div>
     <div>{{c}}</div>
     <div>{{d}}</div>
     <div @click="changeItemThree">改变three</div>
+    <hello-world :e="e"></hello-world>
+    <div>{{e.key}}</div>
+    <vmode v-model="f"></vmode>
+    <div>{{f}}</div>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld';
+import HelloWorld from './components/HelloWorld';
+import vmode from './components/vmode';
 
 export default {
   name: 'App',
@@ -22,6 +26,8 @@ export default {
       a: 1,
       b: 2,
       c: 3,
+      e: { key: 'asdf' },
+      f: 'haha',
     };
   },
   methods: {
@@ -41,6 +47,10 @@ export default {
     d() {
       return this.b + this.c;
     },
+  },
+  components: {
+    HelloWorld,
+    vmode,
   },
 };
 </script>

@@ -9,5 +9,5 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   components: { App },
-  template: '<App/>',
+  template: '<div><div>hello</div><div>make</div><App/></div>',
 });
