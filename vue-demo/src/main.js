@@ -4,5 +4,5 @@ import router from "./router";
 Vue.config.productionTip = false;
 new Vue({
   router,
-  render: h => h("div", [h("router-view")])
+  render: h => h("router-view")
 }).$mount("#app");
