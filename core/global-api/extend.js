@@ -21,6 +21,7 @@ export function initExtend (Vue: GlobalAPI) {
     const Super = this
     const SuperId = Super.cid
     const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
+    //缓存当前的构造函数，同一个组件可能会多次被用到，其构造函数可以进行缓存处理
     if (cachedCtors[SuperId]) {
       return cachedCtors[SuperId]
     }
